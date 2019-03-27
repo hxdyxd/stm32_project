@@ -13,11 +13,11 @@
 #define SOFT_TIMER_GET_TICK_COUNT()  (hal_read_TickCounter())
 
 typedef struct {
-	char is_circle;
-	char on;
-	uint32_t timeout;
-	void (* timer_cb)(void);
-	uint64_t count;
+    char is_circle;
+    char on;
+    uint32_t timeout;
+    void (* timer_cb)(void);
+    uint64_t count;
 } SOFT_TIMER;
 
 

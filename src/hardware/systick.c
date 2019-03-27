@@ -7,8 +7,8 @@ uint64_t clk_count = 0;
 
 void systick_init(void)
 {
-	SystemCoreClockUpdate();
-	if( SysTick_Config( SystemCoreClock / 1000 ) )
+    SystemCoreClockUpdate();
+    if( SysTick_Config( SystemCoreClock / 1000 ) )
     { 
         /* Capture error */ 
         while (1);
@@ -17,6 +17,6 @@ void systick_init(void)
 
 void SysTick_Handler(void)
 {
-	/* System Tick Counter */
+    /* System Tick Counter */
     clk_count++;
 }

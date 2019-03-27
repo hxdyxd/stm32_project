@@ -1,4 +1,4 @@
-/* Keys 2018 06 27 END */
+Ôªø/* Keys 2018 06 27 END */
 /* By hxdyxd */
 
 #include "keys.h"
@@ -8,83 +8,83 @@
 
 struct sGpio
 {
-	uint32_t RCC_APB2Periph;
-	uint16_t GPIO_Pin;
-	GPIO_TypeDef* GPIOx;
+    uint32_t RCC_APB2Periph;
+    uint16_t GPIO_Pin;
+    GPIO_TypeDef* GPIOx;
 };
 
 struct sGpio KEY_GPIO[KEY_NUM] = {
-	{
-		.RCC_APB2Periph = RCC_APB2Periph_GPIOC,
-		.GPIOx = GPIOC,
-		.GPIO_Pin = GPIO_Pin_15,
-	},
+    {
+        .RCC_APB2Periph = RCC_APB2Periph_GPIOC,
+        .GPIOx = GPIOC,
+        .GPIO_Pin = GPIO_Pin_15,
+    },
 };
 
 
 /**
-  * @brief  ≈‰÷√÷∏∂®“˝Ω≈
+  * @brief  ÈÖçÁΩÆÊåáÂÆöÂºïËÑö
   * @retval None
   */
 static void KEY_GPIO_Configuration(void)
 {
-	int i;
+    int i;
     GPIO_InitTypeDef GPIO_InitStruct;
-	
-	for(i = 0; i < KEY_NUM; i++) {
-		RCC_APB2PeriphClockCmd(KEY_GPIO[i].RCC_APB2Periph, ENABLE);
-		//DIO
-		GPIO_InitStruct.GPIO_Pin =  KEY_GPIO[i].GPIO_Pin;
-		//GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
-		GPIO_Init(KEY_GPIO[i].GPIOx, &GPIO_InitStruct);
-	}
+    
+    for(i = 0; i < KEY_NUM; i++) {
+        RCC_APB2PeriphClockCmd(KEY_GPIO[i].RCC_APB2Periph, ENABLE);
+        //DIO
+        GPIO_InitStruct.GPIO_Pin =  KEY_GPIO[i].GPIO_Pin;
+        //GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
+        GPIO_InitStruct.GPIO_Mode = GPIO_Mode_IPU;
+        GPIO_Init(KEY_GPIO[i].GPIOx, &GPIO_InitStruct);
+    }
 }
 
 void keys_init(void)
 {
-	KEY_GPIO_Configuration();
+    KEY_GPIO_Configuration();
 }
 
 uint8_t key_read(int id)
 {
-	return GPIO_ReadInputDataBit(KEY_GPIO[id].GPIOx, KEY_GPIO[id].GPIO_Pin);
+    return GPIO_ReadInputDataBit(KEY_GPIO[id].GPIOx, KEY_GPIO[id].GPIO_Pin);
 }
 
 void keys_proc( void (* key_func)(int8_t key_id) )
 {
-	static int8_t last_key_val = -1;
-	static int8_t key_val = -1;
-	static uint64_t timer = 0;
-	uint8_t i;
-	uint8_t key_find = 0;
-	
-	for(i=0; i<KEY_NUM; i++) {
-		if(key_read(i) == Bit_RESET) {
-			last_key_val = key_val;
-			key_val = i;
-			key_find = 1;
-			if(last_key_val != key_val) {
-				timer = clk_count;
-			}
-			break;
-		}
-	}
-	
-	if(!key_find) {
-		key_val = -1;
-	}
-	
-	static int8_t last_key_val_to_func = -1;
-	
-	if( clk_count - timer > KEY_TIMEOUT ) {
-		
-		if(key_val != -1 && last_key_val_to_func != key_val) {
-			key_func(key_val);
-		}
-		
-		last_key_val_to_func = key_val;
-	}
+    static int8_t last_key_val = -1;
+    static int8_t key_val = -1;
+    static uint64_t timer = 0;
+    uint8_t i;
+    uint8_t key_find = 0;
+    
+    for(i=0; i<KEY_NUM; i++) {
+        if(key_read(i) == Bit_RESET) {
+            last_key_val = key_val;
+            key_val = i;
+            key_find = 1;
+            if(last_key_val != key_val) {
+                timer = clk_count;
+            }
+            break;
+        }
+    }
+    
+    if(!key_find) {
+        key_val = -1;
+    }
+    
+    static int8_t last_key_val_to_func = -1;
+    
+    if( clk_count - timer > KEY_TIMEOUT ) {
+        
+        if(key_val != -1 && last_key_val_to_func != key_val) {
+            key_func(key_val);
+        }
+        
+        last_key_val_to_func = key_val;
+    }
 }
 
 

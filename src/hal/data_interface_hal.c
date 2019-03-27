@@ -26,19 +26,19 @@ uint64_t timer;
 
 void data_interface_hal_init(void)
 {
-	//CLOCK INTERFACE
-	systick_init();
-	//GPIO INTERFACE
-	leds_init();
-	keys_init();
-	//uart
-	interface_usart_init();
+    //CLOCK INTERFACE
+    systick_init();
+    //GPIO INTERFACE
+    leds_init();
+    keys_init();
+    //uart
+    interface_usart_init();
 }
 
 
 uint64_t hal_read_TickCounter(void)
 {
-	return clk_count;
+    return clk_count;
 }
 
 

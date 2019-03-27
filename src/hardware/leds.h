@@ -8,9 +8,9 @@
 
 struct sGpio
 {
-	uint32_t RCC_APB2Periph;
-	uint16_t GPIO_Pin;
-	GPIO_TypeDef* GPIOx;
+    uint32_t RCC_APB2Periph;
+    uint16_t GPIO_Pin;
+    GPIO_TypeDef* GPIOx;
 };
 
 

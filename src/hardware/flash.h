@@ -1,15 +1,15 @@
-#ifndef __FLASH_H__
+ï»¿#ifndef __FLASH_H__
 #define __FLASH_H__
 
 #include "stm32f10x.h"
 #include "stdio.h"
 
-#define FLASH_Page_Size    ((uint32_t) 0x00000400) //FLASHÒ³µÄ´óĞ¡
-//#define Index_Start_Addr   ((uint32_t) 0x08005000) //Êı¾İ´æ´¢±êÖ¾ÆğÊ¼µØÖ·
-//#define Index_End_Addr     ((uint32_t) 0x08005400) //Êı¾İ´æ´¢±êÖ¾½áÊøµØÖ·
-#define FLASH_Start_Addr   ((uint32_t) 0x0800FC00) //Êı¾İ´æ´¢ÆğÊ¼µØÖ·  1K
-#define FLASH_End_Addr     ((uint32_t) 0x08010000) //Êı¾İ´æ´¢½áÊøµØÖ·
-#define DATA_32            ((uint32_t) 0x12345678) //Òª±àĞ´µÄÊı¾İ
+#define FLASH_Page_Size    ((uint32_t) 0x00000400) //FLASHé¡µçš„å¤§å°
+//#define Index_Start_Addr   ((uint32_t) 0x08005000) //æ•°æ®å­˜å‚¨æ ‡å¿—èµ·å§‹åœ°å€
+//#define Index_End_Addr     ((uint32_t) 0x08005400) //æ•°æ®å­˜å‚¨æ ‡å¿—ç»“æŸåœ°å€
+#define FLASH_Start_Addr   ((uint32_t) 0x0800FC00) //æ•°æ®å­˜å‚¨èµ·å§‹åœ°å€  1K
+#define FLASH_End_Addr     ((uint32_t) 0x08010000) //æ•°æ®å­˜å‚¨ç»“æŸåœ°å€
+#define DATA_32            ((uint32_t) 0x12345678) //è¦ç¼–å†™çš„æ•°æ®
 
 uint32_t xfs_sava_cfg(const unsigned char *cfg, uint32_t len);
 
