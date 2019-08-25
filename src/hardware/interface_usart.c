@@ -1,4 +1,4 @@
-﻿/* Uart 2018 06 27 END */
+/* Uart 2018 06 27 END */
 /* By hxdyxd */
 
 #include "interface_usart.h"
@@ -127,6 +127,9 @@ void interface_usart_write_wait(void)
 
 int fputc(int ch, FILE *f)
 {
+    if(ch == '\n') {
+        interface_usart_putchar(0, '\r');
+    }
     interface_usart_putchar(0, (unsigned char)ch);
     return ch;
 }
